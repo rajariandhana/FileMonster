@@ -31,8 +31,6 @@ func _on_choose_okay_pressed() -> void:
 	var new_move = randi() % enemy_hand.Move.size()
 	enemy_hand.set_move(new_move)
 	
-	_pick_enemy()
-	
 func _list_files(path: String) -> Array:
 	var files: Array = []
 	var da := DirAccess.open(path)
