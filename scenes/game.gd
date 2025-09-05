@@ -1,11 +1,19 @@
 extends Node2D
 
+@onready var player_hand: Area2D = $PlayerHand
 
-# Called when the node enters the scene tree for the first time.
+@onready var choose_okay: Button = $ChooseOkay
+@onready var toggle_choose: Button = $ToggleChoose
+
 func _ready() -> void:
-	pass # Replace with function body.
+	toggle_choose.visible = true	
+	choose_okay.visible = false
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_toggle_choose_pressed() -> void:
+	toggle_choose.visible = false
+	choose_okay.visible = true
+	player_hand.toggle_choose(true)
+	
+func _on_choose_okay_pressed() -> void:
+	choose_okay.visible = false;
+	player_hand.toggle_choose(false)
