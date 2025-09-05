@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://6tkv8ohnat6r"]
+
+[ext_resource type="Script" uid="uid://dgnj5viotp21n" path="res://scenes/game.gd" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://skrt8dievfwd" path="res://icon.svg" id="2_yqjtg"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_uwrxv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_yqjtg")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -58.0
+offset_top = 97.0
+offset_right = 60.0
+offset_bottom = 146.0
+text = "HEllo worldddd
+z"
