@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://rk16a7ogfo8u"]
+
+[ext_resource type="Script" uid="uid://cfqiwtp0qt68d" path="res://scenes/enemy_hand.gd" id="7_qk2k6"]
+[ext_resource type="Texture2D" uid="uid://cm81x4hpgc0r1" path="res://graphics/enemy_hand/paper.png" id="8_0eywf"]
+
+[node name="EnemyHand" type="Node2D"]
+script = ExtResource("7_qk2k6")
+
+[node name="Art" type="Sprite2D" parent="."]
+position = Vector2(40, 25)
+rotation = -0.315912
+scale = Vector2(0.586977, 0.540049)
+texture = ExtResource("8_0eywf")

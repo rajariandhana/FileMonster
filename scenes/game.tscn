@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://6tkv8ohnat6r"]
+[gd_scene load_steps=9 format=3 uid="uid://6tkv8ohnat6r"]
 
 [ext_resource type="Script" uid="uid://dgnj5viotp21n" path="res://scenes/game.gd" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://skrt8dievfwd" path="res://icon.svg" id="2_yqjtg"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://b2wtax51uglhu" path="res://scripts/player_right.gd" id="4_iywne"]
 [ext_resource type="PackedScene" uid="uid://b5mtfs7jqey37" path="res://scenes/player_left.tscn" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://c2qmw5bk2yol7" path="res://scripts/player_left.gd" id="6_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://rk16a7ogfo8u" path="res://scenes/enemy_hand.tscn" id="7_vtaks"]
+[ext_resource type="PackedScene" uid="uid://d0ayleyslfjf2" path="res://scenes/file_badge.tscn" id="8_kvpfn"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_uwrxv")
@@ -44,6 +46,11 @@ text = "Okay"
 [node name="PlayerLeft" parent="." instance=ExtResource("5_p57ef")]
 position = Vector2(-181, 168)
 script = ExtResource("6_u5sy4")
+
+[node name="EnemyHand" parent="." instance=ExtResource("7_vtaks")]
+position = Vector2(-281, -234)
+
+[node name="FileBadge" parent="." instance=ExtResource("8_kvpfn")]
 
 [connection signal="pressed" from="ToggleChoose" to="." method="_on_toggle_choose_pressed"]
 [connection signal="pressed" from="ChooseOkay" to="." method="_on_choose_okay_pressed"]
