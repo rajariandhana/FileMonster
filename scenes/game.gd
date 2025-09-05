@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var player_left: Node2D = $PlayerLeft
 @onready var player_right: Area2D = $PlayerRight
 
 @onready var choose_okay: Button = $ChooseOkay
@@ -12,8 +13,10 @@ func _ready() -> void:
 func _on_toggle_choose_pressed() -> void:
 	toggle_choose.visible = false
 	choose_okay.visible = true
+	player_left.toggle_activable(true)
 	player_right.toggle_choose(true)
 	
 func _on_choose_okay_pressed() -> void:
 	choose_okay.visible = false;
+	player_left.toggle_activable(false)
 	player_right.toggle_choose(false)

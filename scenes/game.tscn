@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://6tkv8ohnat6r"]
+[gd_scene load_steps=7 format=3 uid="uid://6tkv8ohnat6r"]
 
 [ext_resource type="Script" uid="uid://dgnj5viotp21n" path="res://scenes/game.gd" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://skrt8dievfwd" path="res://icon.svg" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bqp7oxm2tlpn1" path="res://scenes/player_right.tscn" id="3_lbhrr"]
 [ext_resource type="Script" uid="uid://b2wtax51uglhu" path="res://scripts/player_right.gd" id="4_iywne"]
+[ext_resource type="PackedScene" uid="uid://b5mtfs7jqey37" path="res://scenes/player_left.tscn" id="5_p57ef"]
+[ext_resource type="Script" uid="uid://c2qmw5bk2yol7" path="res://scripts/player_left.gd" id="6_u5sy4"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_uwrxv")
@@ -22,7 +24,7 @@ z"
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="PlayerRight" parent="." instance=ExtResource("3_lbhrr")]
-position = Vector2(334, 96)
+position = Vector2(517, 263)
 script = ExtResource("4_iywne")
 
 [node name="ToggleChoose" type="Button" parent="."]
@@ -38,6 +40,10 @@ offset_top = 257.0
 offset_right = 55.0
 offset_bottom = 288.0
 text = "Okay"
+
+[node name="PlayerLeft" parent="." instance=ExtResource("5_p57ef")]
+position = Vector2(-181, 168)
+script = ExtResource("6_u5sy4")
 
 [connection signal="pressed" from="ToggleChoose" to="." method="_on_toggle_choose_pressed"]
 [connection signal="pressed" from="ChooseOkay" to="." method="_on_choose_okay_pressed"]
