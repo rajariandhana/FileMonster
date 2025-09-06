@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://de7lk6pk5vcqo"]
+[gd_scene load_steps=13 format=3 uid="uid://de7lk6pk5vcqo"]
 
 [ext_resource type="Texture2D" uid="uid://nnibd37y2dr5" path="res://graphics/menu/Logo.png" id="1_mj5lg"]
 [ext_resource type="Texture2D" uid="uid://dm6dq6x8sxa0b" path="res://graphics/menu/frame.png" id="2_ufwb2"]
@@ -11,18 +11,39 @@
 [ext_resource type="Texture2D" uid="uid://c2g31ptbkwpnj" path="res://graphics/menu/hardcore.png" id="9_81l6r"]
 [ext_resource type="Texture2D" uid="uid://74urspo4fwvm" path="res://graphics/menu/hardcore_pressed.png" id="10_rsfmq"]
 [ext_resource type="Texture2D" uid="uid://diyyqieuu8i3j" path="res://graphics/menu/hardcore_hover.png" id="11_oi1it"]
+[ext_resource type="VideoStream" uid="uid://bpvyus1qo2njj" path="res://bg_video.ogv" id="12_ufwb2"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="logo" type="Sprite2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="bg" type="VideoStreamPlayer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -196.0
+offset_top = -366.0
+offset_right = 151.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("12_ufwb2")
+autoplay = true
+expand = true
+loop = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="logo" type="Sprite2D" parent="CanvasLayer2"]
 position = Vector2(755, 334)
 texture = ExtResource("1_mj5lg")
 
-[node name="frame" type="Sprite2D" parent="."]
+[node name="frame" type="Sprite2D" parent="CanvasLayer2"]
 position = Vector2(752, 745)
 texture = ExtResource("2_ufwb2")
 
-[node name="play" type="TextureButton" parent="."]
+[node name="play" type="TextureButton" parent="CanvasLayer2"]
 offset_left = 84.0
 offset_top = 693.0
 offset_right = 428.0
@@ -31,7 +52,7 @@ texture_normal = ExtResource("3_6cdou")
 texture_pressed = ExtResource("4_i42df")
 texture_hover = ExtResource("5_7jp70")
 
-[node name="quit" type="TextureButton" parent="."]
+[node name="quit" type="TextureButton" parent="CanvasLayer2"]
 offset_left = 471.0
 offset_top = 694.0
 offset_right = 815.0
@@ -40,7 +61,7 @@ texture_normal = ExtResource("6_mxgkd")
 texture_pressed = ExtResource("7_g6gyw")
 texture_hover = ExtResource("8_3dmrc")
 
-[node name="hardcore" type="TextureButton" parent="."]
+[node name="hardcore" type="TextureButton" parent="CanvasLayer2"]
 offset_left = 867.0
 offset_top = 694.0
 offset_right = 1425.0
@@ -48,7 +69,3 @@ offset_bottom = 796.0
 texture_normal = ExtResource("9_81l6r")
 texture_pressed = ExtResource("10_rsfmq")
 texture_hover = ExtResource("11_oi1it")
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0

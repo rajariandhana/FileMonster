@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FileMonster"
-run/main_scene="uid://6tkv8ohnat6r"
+run/main_scene="uid://de7lk6pk5vcqo"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
