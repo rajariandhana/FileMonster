@@ -14,9 +14,20 @@ extends Node2D
 
 @onready var button_shoot: TextureButton = $ButtonShoot
 
+@onready var bg_layer: CanvasLayer = $CanvasLayer
+@onready var bg_video: VideoStreamPlayer = $CanvasLayer/VideoStreamPlayer
+@onready var bg_rect: ColorRect = $CanvasLayer/ColorRect
+
 var downloads_path: String = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
 
 func _ready() -> void:
+	bg_layer.layer = -1                          # draw behind the game
+	bg_video.expand = true                       # fill screen
+	bg_video.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bg_video.autoplay = true                     # (optional) start automatically
+	if is_instance_valid(bg_rect):
+		bg_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 	file_badge.base_dir = downloads_path
 	randomize()
 	reset_state()
