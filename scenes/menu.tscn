@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://3ihx5s1awdre"]
+[gd_scene load_steps=14 format=3 uid="uid://de7lk6pk5vcqo"]
 
 [ext_resource type="Texture2D" uid="uid://nnibd37y2dr5" path="res://graphics/menu/Logo.png" id="1_mj5lg"]
+[ext_resource type="Script" uid="uid://b3pfrmrafgdc0" path="res://scripts/main_menu.gd" id="2_6cdou"]
 [ext_resource type="Texture2D" uid="uid://dm6dq6x8sxa0b" path="res://graphics/menu/frame.png" id="2_ufwb2"]
 [ext_resource type="Texture2D" uid="uid://bllcax2doyt8i" path="res://graphics/menu/play.png" id="3_6cdou"]
 [ext_resource type="Texture2D" uid="uid://b4pjmr8wbhw0n" path="res://graphics/menu/play_pressed.png" id="4_i42df"]
@@ -11,9 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://c2g31ptbkwpnj" path="res://graphics/menu/hardcore.png" id="9_81l6r"]
 [ext_resource type="Texture2D" uid="uid://74urspo4fwvm" path="res://graphics/menu/hardcore_pressed.png" id="10_rsfmq"]
 [ext_resource type="Texture2D" uid="uid://diyyqieuu8i3j" path="res://graphics/menu/hardcore_hover.png" id="11_oi1it"]
-[ext_resource type="VideoStream" path="res://bg_video.ogv" id="12_ufwb2"]
+[ext_resource type="VideoStream" uid="uid://bpvyus1qo2njj" path="res://bg_video.ogv" id="12_ufwb2"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("2_6cdou")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
@@ -69,3 +71,6 @@ offset_bottom = 796.0
 texture_normal = ExtResource("9_81l6r")
 texture_pressed = ExtResource("10_rsfmq")
 texture_hover = ExtResource("11_oi1it")
+
+[connection signal="pressed" from="CanvasLayer2/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer2/quit" to="." method="_on_quit_pressed"]

@@ -19,6 +19,7 @@ var hardcore_pressed = preload("res://graphics/menu/hardcore_pressed.png")
 
 func _ready():
 	# Set textures for each button
+	return
 	play_button.texture_normal = play_normal
 	play_button.texture_hover = play_hover
 	play_button.texture_pressed = play_pressed
@@ -37,8 +38,9 @@ func _ready():
 	#hardcore_button.pressed.connect(_on_hardcore_pressed)
 
 func _on_play_pressed():
-	#get_tree().change_scene_to_file("res://scenes/game.tscn")
-	get_tree().change_scene("res://scenes/game.tscn")
+	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	#print("here")
+	#get_tree().change_scene("res://scenes/game.tscn")
 
 
 func _on_quit_pressed():

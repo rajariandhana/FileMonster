@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b5mtfs7jqey37" path="res://scenes/player_left.tscn" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://c2qmw5bk2yol7" path="res://scripts/player_left.gd" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://rk16a7ogfo8u" path="res://scenes/enemy_hand.tscn" id="7_vtaks"]
-[ext_resource type="VideoStream" path="res://bg_video.ogv" id="8_0tnpc"]
+[ext_resource type="VideoStream" uid="uid://bpvyus1qo2njj" path="res://bg_video.ogv" id="8_0tnpc"]
 [ext_resource type="Shader" path="res://scenes/game.gdshader" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://d0ayleyslfjf2" path="res://scenes/file_badge.tscn" id="8_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://c2sksa535sx5t" path="res://graphics/buttons/Shoot.png" id="9_0tnpc"]
