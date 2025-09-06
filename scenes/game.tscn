@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b5mtfs7jqey37" path="res://scenes/player_left.tscn" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://c2qmw5bk2yol7" path="res://scripts/player_left.gd" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://rk16a7ogfo8u" path="res://scenes/enemy_hand.tscn" id="7_vtaks"]
-[ext_resource type="VideoStream" uid="uid://65itiw4udqds" path="res://bg_video.ogv" id="8_0tnpc"]
+[ext_resource type="VideoStream" uid="uid://14m8q8278t3p" path="res://bg_video.ogv" id="8_0tnpc"]
 [ext_resource type="Shader" uid="uid://7g81g3c7gqde" path="res://scenes/game.gdshader" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://d0ayleyslfjf2" path="res://scenes/file_badge.tscn" id="8_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://c2sksa535sx5t" path="res://graphics/buttons/Shoot.png" id="9_0tnpc"]
@@ -57,33 +57,13 @@ position = Vector2(-181, 168)
 script = ExtResource("6_u5sy4")
 
 [node name="EnemyHand" parent="." instance=ExtResource("7_vtaks")]
-position = Vector2(-281, -234)
+position = Vector2(-111, -202)
 
 [node name="FileBadge" parent="." instance=ExtResource("8_kvpfn")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-material = SubResource("ShaderMaterial_0tnpc")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-stream = ExtResource("8_0tnpc")
-autoplay = true
-expand = true
-loop = true
-script = SubResource("GDScript_0tnpc")
+offset_left = 30.0
+offset_top = -337.0
+offset_right = 307.0
+offset_bottom = -60.0
 
 [node name="ButtonShoot" type="TextureButton" parent="."]
 offset_left = -149.0
@@ -93,6 +73,38 @@ offset_bottom = 366.0
 texture_normal = ExtResource("9_0tnpc")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="CanvasLayer Fg" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer Fg"]
+material = SubResource("ShaderMaterial_0tnpc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -247.0
+offset_top = -399.0
+offset_right = 377.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stream = ExtResource("8_0tnpc")
+autoplay = true
+expand = true
+loop = true
+script = SubResource("GDScript_0tnpc")
 
 [connection signal="pressed" from="ToggleChoose" to="." method="_on_toggle_choose_pressed"]
 [connection signal="pressed" from="ChooseOkay" to="." method="_on_choose_okay_pressed"]
