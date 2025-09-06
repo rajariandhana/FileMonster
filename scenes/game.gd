@@ -74,6 +74,7 @@ func _on_button_shoot_pressed() -> void:
 	enemy_hand.set_move(move)
 	
 	player_right.throw()
+	enemy_hand.throw()
 	throw_timer.start(1)
 
 var yes_enemy:= false
@@ -83,6 +84,8 @@ func process_status():
 	#enemy_hand.red()
 	
 	yes_enemy = false
+	#player_right.red()
+	#enemy_hand.red()
 	if win == 0:
 		pass
 	elif win == 1:
@@ -91,6 +94,7 @@ func process_status():
 		yes_enemy = true
 		enemy_hand.red()
 	else:
+		#pass
 		#status.text = "LOSE"
 		player_right.red()
 	flash_timer.start(2)

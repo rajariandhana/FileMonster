@@ -110,6 +110,6 @@ shape = SubResource("CircleShape2D_4moqc")
 
 [node name="Animasi" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fos0x")
-animation = &"move_rock"
+animation = &"move_scissor"
 
 [connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]

@@ -14,15 +14,33 @@ const TEX := {
 }
 
 var current: int = Move.DEFL
+@onready var animasi: AnimatedSprite2D = $Animasi
 
 func set_move(m: int) -> void:
 	current = m
 	art.texture = TEX[m]   # <--- here you swap the texture
 
 func _ready() -> void:
+	default()
+	
+func default():
 	set_move(Move.DEFL)
 	original_color = art.modulate
 	flash_timer.autostart = false
+	animasi.visible = false
+	art.visible = true
+	
+func throw():
+	print("throwing "+str(current))
+	animasi.visible = true
+	art.visible=false
+	if current == 1:
+		animasi.play("move_rock")
+	elif current == 2:
+		animasi.play("move_paper")
+	elif current == 3:
+		animasi.play("move_scissor")
+	
 	
 func get_move():
 	return current
@@ -46,7 +64,7 @@ func red():
 func _set_flash_color():
 	var flash_color = current_flash_color if flashes_left % 2 == 1 else original_color
 	art.modulate = flash_color
-	#animasi.modulate = flash_color
+	animasi.modulate = flash_color
 	
 func _on_flash_timer_timeout():
 	if flashes_left > 0:
@@ -56,4 +74,4 @@ func _on_flash_timer_timeout():
 	else:
 		# Final reset to original color
 		art.modulate = original_color
-		#animasi.modulate = original_color
+		animasi.modulate = original_color
