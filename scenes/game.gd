@@ -21,6 +21,8 @@ extends Node2D
 
 var downloads_path: String = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
 
+var chosen_fullpath: String = ""
+
 func _ready() -> void:
 	bg_layer.layer = -1                          # draw behind the game
 	bg_video.expand = true                       # fill screen
@@ -58,6 +60,7 @@ func _pick_enemy() -> void:
 
 	var idx: int = randi() % files.size()
 	var chosen: String = files[idx]
+	chosen_fullpath = downloads_path.path_join(chosen)
 	file_badge.set_file(chosen)
 
 func _on_button_shoot_pressed() -> void:
@@ -97,8 +100,28 @@ func check_win(player, enemy):
 	if player==enemy:
 		return 0
 	elif player==1 and enemy==3 || player==2 and enemy==1 || player==3 && enemy==2:
+		#_delete_chosen_file(true)
 		return 1
 	return -1
+	
+func _delete_chosen_file(move_to_trash: bool = true) -> void:
+	if chosen_fullpath == "":
+		return
+
+	# Safety: only delete inside Downloads.
+	if not chosen_fullpath.begins_with(downloads_path):
+		push_error("Refusing to delete outside Downloads: %s" % chosen_fullpath)
+		return
+
+	var err := OK
+	if move_to_trash and OS.has_method("move_to_trash"):
+		err = OS.move_to_trash(chosen_fullpath)
+		
+	if err != OK:
+		push_error("Failed to delete: %s (err=%d)" % [chosen_fullpath, err])
+		return
+		
+	chosen_fullpath = ""
 
 func reset_state(enemy: bool):
 	if enemy:
