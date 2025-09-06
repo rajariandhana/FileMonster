@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://de7lk6pk5vcqo"]
+[gd_scene load_steps=15 format=3 uid="uid://de7lk6pk5vcqo"]
 
 [ext_resource type="Texture2D" uid="uid://nnibd37y2dr5" path="res://graphics/menu/Logo.png" id="1_mj5lg"]
 [ext_resource type="Script" uid="uid://b3pfrmrafgdc0" path="res://scripts/main_menu.gd" id="2_6cdou"]
@@ -12,7 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://c2g31ptbkwpnj" path="res://graphics/menu/hardcore.png" id="9_81l6r"]
 [ext_resource type="Texture2D" uid="uid://74urspo4fwvm" path="res://graphics/menu/hardcore_pressed.png" id="10_rsfmq"]
 [ext_resource type="Texture2D" uid="uid://diyyqieuu8i3j" path="res://graphics/menu/hardcore_hover.png" id="11_oi1it"]
-[ext_resource type="VideoStream" uid="uid://65itiw4udqds" path="res://bg_video.ogv" id="12_ufwb2"]
+[ext_resource type="VideoStream" uid="uid://14m8q8278t3p" path="res://bg_video.ogv" id="12_ufwb2"]
+[ext_resource type="AudioStream" uid="uid://bwrg3a30oob6q" path="res://music.ogg" id="14_i42df"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_6cdou")
@@ -71,6 +72,10 @@ offset_bottom = 796.0
 texture_normal = ExtResource("9_81l6r")
 texture_pressed = ExtResource("10_rsfmq")
 texture_hover = ExtResource("11_oi1it")
+
+[node name="BGM (AudioStreamPlayer2D)" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_i42df")
+autoplay = true
 
 [connection signal="pressed" from="CanvasLayer2/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer2/quit" to="." method="_on_quit_pressed"]
