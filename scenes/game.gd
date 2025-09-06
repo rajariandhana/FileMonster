@@ -9,8 +9,9 @@ extends Node2D
 @onready var file_badge: FileBadge = $FileBadge
 @onready var enemy_hand: Node2D = $EnemyHand
 
-@onready var timer: Node = $Timer
 #@onready var status: Control = $Status
+@onready var throw_timer: Timer = $ThrowTimer
+@onready var flash_timer: Timer = $FlashTimer
 
 @onready var button_shoot: TextureButton = $ButtonShoot
 
@@ -30,7 +31,7 @@ func _ready() -> void:
 
 	file_badge.base_dir = downloads_path
 	randomize()
-	reset_state()
+	reset_state(true)
 	
 func _list_files(path: String) -> Array:
 	var files: Array = []
@@ -60,6 +61,7 @@ func _pick_enemy() -> void:
 	file_badge.set_file(chosen)
 
 func _on_button_shoot_pressed() -> void:
+	print("here")
 	button_shoot.visible = false;
 	#player_left.toggle_activable(false)
 	#player_right.toggle_choose(false)
@@ -68,23 +70,27 @@ func _on_button_shoot_pressed() -> void:
 	var move: int = randi_range(1,3)
 	enemy_hand.set_move(move)
 	
-	process_status()
-	timer.start(2.5)
+	player_right.throw()
+	throw_timer.start(1)
 
+var yes_enemy:= false
 func process_status():
 	var win = check_win(player_right.get_move(), enemy_hand.get_move())
+	#player_right.red()
+	#enemy_hand.red()
+	
+	yes_enemy = false
 	if win == 0:
-		#status.text = "TIE"
 		pass
-		#enemy_hand.yellow()
-		#player_right.yellow()
 	elif win == 1:
 #		damage, delete
 		#status.text = "WIN"
+		yes_enemy = true
 		enemy_hand.red()
 	else:
 		#status.text = "LOSE"
 		player_right.red()
+	flash_timer.start(2)
 	
 func check_win(player, enemy):
 	#print(str(player)+" "+str(enemy))
@@ -94,8 +100,9 @@ func check_win(player, enemy):
 		return 1
 	return -1
 
-func reset_state():
-	_pick_enemy()
+func reset_state(enemy: bool):
+	if enemy:
+		_pick_enemy()
 	#player_left.toggle_activable(true)
 	#player_right.toggle_choose(true)
 	button_shoot.visible = true
@@ -103,7 +110,12 @@ func reset_state():
 	player_right.activate_choose()
 	player_right.set_move(1)
 	enemy_hand.set_move(0)
-	timer.stop()
+	flash_timer.stop()
 
-func _on_timer_timeout() -> void:
-	reset_state()	
+func _on_throw_timer_timeout() -> void:
+	throw_timer.stop()
+	process_status()
+
+func _on_flash_timer_timeout() -> void:
+	flash_timer.stop()
+	reset_state(yes_enemy)

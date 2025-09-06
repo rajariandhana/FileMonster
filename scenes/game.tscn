@@ -1,15 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://6tkv8ohnat6r"]
+[gd_scene load_steps=12 format=3 uid="uid://6tkv8ohnat6r"]
 
 [ext_resource type="Script" uid="uid://dgnj5viotp21n" path="res://scenes/game.gd" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bqp7oxm2tlpn1" path="res://scenes/player_right.tscn" id="3_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://b5mtfs7jqey37" path="res://scenes/player_left.tscn" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://c2qmw5bk2yol7" path="res://scripts/player_left.gd" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://rk16a7ogfo8u" path="res://scenes/enemy_hand.tscn" id="7_vtaks"]
-[ext_resource type="VideoStream" uid="uid://bpvyus1qo2njj" path="res://bg_video.ogv" id="8_0tnpc"]
+[ext_resource type="VideoStream" path="res://bg_video.ogv" id="8_0tnpc"]
 [ext_resource type="Shader" path="res://scenes/game.gdshader" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://d0ayleyslfjf2" path="res://scenes/file_badge.tscn" id="8_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://c2sksa535sx5t" path="res://graphics/buttons/Shoot.png" id="9_0tnpc"]
-[ext_resource type="AudioStream" uid="uid://bwrg3a30oob6q" path="res://music.ogg" id="10_vtaks"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0tnpc"]
 shader = ExtResource("8_gee14")
@@ -66,13 +65,6 @@ offset_top = -337.0
 offset_right = 307.0
 offset_bottom = -60.0
 
-[node name="ButtonShoot" type="TextureButton" parent="."]
-offset_left = -149.0
-offset_top = 298.0
-offset_right = 115.0
-offset_bottom = 366.0
-texture_normal = ExtResource("9_0tnpc")
-
 [node name="Timer" type="Timer" parent="."]
 
 [node name="CanvasLayer Fg" type="CanvasLayer" parent="."]
@@ -107,11 +99,19 @@ expand = true
 loop = true
 script = SubResource("GDScript_0tnpc")
 
-[node name="BGM" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_vtaks")
-autoplay = true
+[node name="ButtonShoot" type="TextureButton" parent="."]
+offset_left = -149.0
+offset_top = 298.0
+offset_right = 115.0
+offset_bottom = 366.0
+texture_normal = ExtResource("9_0tnpc")
+
+[node name="ThrowTimer" type="Timer" parent="."]
+
+[node name="FlashTimer" type="Timer" parent="."]
 
 [connection signal="pressed" from="ToggleChoose" to="." method="_on_toggle_choose_pressed"]
 [connection signal="pressed" from="ChooseOkay" to="." method="_on_choose_okay_pressed"]
 [connection signal="pressed" from="ButtonShoot" to="." method="_on_button_shoot_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ThrowTimer" to="." method="_on_throw_timer_timeout"]
+[connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]

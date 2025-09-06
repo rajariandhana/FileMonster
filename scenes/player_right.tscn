@@ -1,10 +1,100 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqp7oxm2tlpn1"]
+[gd_scene load_steps=23 format=3 uid="uid://bqp7oxm2tlpn1"]
 
 [ext_resource type="Script" uid="uid://b2wtax51uglhu" path="res://scripts/player_right.gd" id="1_2tujd"]
 [ext_resource type="Texture2D" uid="uid://v73lhx057x80" path="res://graphics/player_hand/default.png" id="1_4moqc"]
+[ext_resource type="Texture2D" uid="uid://c6n8ygpr7gdbh" path="res://graphics/player_hand/move_paper/Property 1=01.png" id="3_ntahq"]
+[ext_resource type="Texture2D" uid="uid://c0hw6cdtx5ne1" path="res://graphics/player_hand/move_paper/Property 1=02.png" id="4_j6gob"]
+[ext_resource type="Texture2D" uid="uid://baxjqht5nolcc" path="res://graphics/player_hand/move_paper/Property 1=03.png" id="5_t777j"]
+[ext_resource type="Texture2D" uid="uid://bcy2w5uwu347b" path="res://graphics/player_hand/move_paper/Property 1=04.png" id="6_6mbjq"]
+[ext_resource type="Texture2D" uid="uid://drn5eq6flie5l" path="res://graphics/player_hand/move_paper/Property 1=05.png" id="7_rfg2a"]
+[ext_resource type="Texture2D" uid="uid://bxbgxo5t1hna4" path="res://graphics/player_hand/move_paper/Property 1=06.png" id="8_mqito"]
+[ext_resource type="Texture2D" uid="uid://b26py6ijjifok" path="res://graphics/player_hand/move_rock/Property 1=01.png" id="9_fos0x"]
+[ext_resource type="Texture2D" uid="uid://cvf014gg0mtws" path="res://graphics/player_hand/move_rock/Property 1=02.png" id="10_40xea"]
+[ext_resource type="Texture2D" uid="uid://dxkad8pwv8cbf" path="res://graphics/player_hand/move_rock/Property 1=03.png" id="11_gp8jf"]
+[ext_resource type="Texture2D" uid="uid://e2u0gg2s72im" path="res://graphics/player_hand/move_rock/Property 1=04.png" id="12_qu7vs"]
+[ext_resource type="Texture2D" uid="uid://cbe4pa8flbjhk" path="res://graphics/player_hand/move_rock/Property 1=05.png" id="13_lh23u"]
+[ext_resource type="Texture2D" uid="uid://r4bogcuawafs" path="res://graphics/player_hand/move_rock/Property 1=06.png" id="14_hmxk8"]
+[ext_resource type="Texture2D" uid="uid://bwa568ifiamu3" path="res://graphics/player_hand/move_scissor/Property 1=01.png" id="15_yalqt"]
+[ext_resource type="Texture2D" uid="uid://djv32qqntcgba" path="res://graphics/player_hand/move_scissor/Property 1=02.png" id="16_bcmqs"]
+[ext_resource type="Texture2D" uid="uid://xd8rftxghor8" path="res://graphics/player_hand/move_scissor/Property 1=03.png" id="17_pedal"]
+[ext_resource type="Texture2D" uid="uid://bb6dwsx4sl2bn" path="res://graphics/player_hand/move_scissor/Property 1=04.png" id="18_ha3wj"]
+[ext_resource type="Texture2D" uid="uid://dw1ru8csd414o" path="res://graphics/player_hand/move_scissor/Property 1=05.png" id="19_4nwi8"]
+[ext_resource type="Texture2D" uid="uid://c4u26p6ymkvdu" path="res://graphics/player_hand/move_scissor/Property 1=06.png" id="20_utrf5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4moqc"]
 radius = 289.043
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fos0x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ntahq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_j6gob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_t777j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6mbjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rfg2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mqito")
+}],
+"loop": false,
+"name": &"move_paper",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_fos0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_40xea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_gp8jf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qu7vs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_lh23u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_hmxk8")
+}],
+"loop": false,
+"name": &"move_rock",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_yalqt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_bcmqs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_pedal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ha3wj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_4nwi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_utrf5")
+}],
+"loop": false,
+"name": &"move_scissor",
+"speed": 6.0
+}]
 
 [node name="PlayerHand" type="Area2D"]
 script = ExtResource("1_2tujd")
@@ -17,5 +107,9 @@ position = Vector2(75, 3)
 shape = SubResource("CircleShape2D_4moqc")
 
 [node name="FlashTimer" type="Timer" parent="."]
+
+[node name="Animasi" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fos0x")
+animation = &"move_rock"
 
 [connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]

@@ -30,25 +30,30 @@ func get_move():
 
 var original_color : Color = Color(1, 1, 1)
 var red_flash_color : Color = Color(1, 0, 0)  # Red color for damage
-var yellow_flash_color : Color = Color(0.8, 1, 0)
+#var white_flash_color : Color = Color(1, 1, 1)
 var flash_duration : float = 0.2
 var flash_count : int = 6
 var flashes_left : int = 0
 var current_flash_color : Color = Color(1, 1, 1)
 
 func red():
+	print(red)
 	current_flash_color = red_flash_color
 	flashes_left = flash_count
-	flash_timer.start(flash_duration)
-func yellow():
-	current_flash_color = yellow_flash_color
-	flashes_left = flash_count
+	_set_flash_color()
 	flash_timer.start(flash_duration)
 
+func _set_flash_color():
+	var flash_color = current_flash_color if flashes_left % 2 == 1 else original_color
+	art.modulate = flash_color
+	#animasi.modulate = flash_color
+	
 func _on_flash_timer_timeout():
 	if flashes_left > 0:
-		art.modulate = current_flash_color if flashes_left % 2 == 1 else original_color
 		flashes_left -= 1
+		_set_flash_color()
 		flash_timer.start(flash_duration)
 	else:
+		# Final reset to original color
 		art.modulate = original_color
+		#animasi.modulate = original_color
