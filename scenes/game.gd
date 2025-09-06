@@ -104,7 +104,7 @@ func check_win(player, enemy):
 	if player==enemy:
 		return 0
 	elif player==1 and enemy==3 || player==2 and enemy==1 || player==3 && enemy==2:
-		#_delete_chosen_file(true)
+		_delete_chosen_file(true)
 		return 1
 	return -1
 	
