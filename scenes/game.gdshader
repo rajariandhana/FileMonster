@@ -1,13 +1,16 @@
 // This tells Godot it's a 2D shader that will be applied to a CanvasItem.
 shader_type canvas_item;
 
-// NEW LINE TO FIX THE ERROR IN GODOT 4
-// This tells Godot to capture the screen and make it available in a variable called SCREEN_TEXTURE.
+// This tells Godot to capture the screen and make it available.
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
 // ===================================================================
 //  TWEAK THESE VALUES in the Inspector under "Shader Parameters"
 // ===================================================================
+
+// NEW: Controls the zoom level. 1.0 is no zoom.
+// Increase this slightly to hide the black borders from the fisheye.
+uniform float zoom : hint_range(1.0, 2.0) = 1.15;
 
 // Controls the strength of the fisheye lens bulge.
 uniform float fisheye_strength : hint_range(-1.0, 1.0) = 0.4;
@@ -20,32 +23,32 @@ uniform float vignette_intensity : hint_range(0.0, 3.0) = 1.2;
 
 
 // ===================================================================
-//  Shader Logic (you don't need to edit below here for basic tweaks)
+//  Shader Logic
 // ===================================================================
 
 void fragment() {
-    // Apply fisheye distortion to the screen coordinates (UV).
-    vec2 distorted_uv = UV - vec2(0.5);
-    float r = length(distorted_uv);
-    distorted_uv = UV + distorted_uv * (pow(r, 2.0) * fisheye_strength);
+    // 1. Apply Zoom to the screen coordinates first.
+    vec2 centered_uv = UV - vec2(0.5);
+    vec2 zoomed_uv = centered_uv / zoom; // Divide to zoom in
+    zoomed_uv += vec2(0.5);
 
-    // Get the screen's color at the newly distorted coordinate.
-    // This line now works because we defined SCREEN_TEXTURE at the top.
+    // 2. Apply Fisheye effect to the already zoomed coordinates.
+    vec2 distorted_uv = zoomed_uv - vec2(0.5);
+    float r = length(distorted_uv);
+    distorted_uv = zoomed_uv + distorted_uv * (pow(r, 2.0) * fisheye_strength);
+    
+    // 3. Get the final color from the distorted texture.
+    // The IF statement that created the black borders has been removed.
     vec4 color = texture(SCREEN_TEXTURE, distorted_uv);
 
-    // If the distortion pulls from outside the screen, make the pixel black.
-    if (distorted_uv.x < 0.0 || distorted_uv.x > 1.0 || distorted_uv.y < 0.0 || distorted_uv.y > 1.0) {
-        color = vec4(0.0, 0.0, 0.0, 1.0);
-    } else {
-        // Apply CRT Scanlines effect
-        float scanline = sin(UV.y * 800.0) * scanline_intensity;
-        color.rgb -= scanline;
+    // 4. Apply other effects using the original, non-zoomed UV.
+    // This keeps the scanlines and vignette perfectly aligned with the screen.
+    float scanline = sin(UV.y * 800.0) * scanline_intensity;
+    color.rgb -= scanline;
 
-        // Apply Vignette effect
-        float vignette = 1.0 - (length(UV - vec2(0.5)) * vignette_intensity);
-        color.rgb *= vignette;
-    }
+    float vignette = 1.0 - (length(UV - vec2(0.5)) * vignette_intensity);
+    color.rgb *= vignette;
 
-    // Output the final, modified color to the screen.
+    // 5. Output the final, modified color to the screen.
     COLOR = color;
 }
