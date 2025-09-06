@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dgnj5viotp21n" path="res://scenes/game.gd" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bqp7oxm2tlpn1" path="res://scenes/player_right.tscn" id="3_lbhrr"]
-[ext_resource type="Script" uid="uid://b2wtax51uglhu" path="res://scripts/player_right.gd" id="4_iywne"]
 [ext_resource type="PackedScene" uid="uid://b5mtfs7jqey37" path="res://scenes/player_left.tscn" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://c2qmw5bk2yol7" path="res://scripts/player_left.gd" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://rk16a7ogfo8u" path="res://scenes/enemy_hand.tscn" id="7_vtaks"]
-[ext_resource type="Shader" uid="uid://7g81g3c7gqde" path="res://scenes/game.gdshader" id="8_gee14"]
+[ext_resource type="Texture2D" uid="uid://c2sksa535sx5t" path="res://graphics/buttons/Shoot.png" id="8_0tnpc"]
+[ext_resource type="Shader" path="res://scenes/game.gdshader" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://d0ayleyslfjf2" path="res://scenes/file_badge.tscn" id="8_kvpfn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0tnpc"]
@@ -23,9 +23,9 @@ script = ExtResource("1_uwrxv")
 
 [node name="PlayerRight" parent="." instance=ExtResource("3_lbhrr")]
 position = Vector2(517, 263)
-script = ExtResource("4_iywne")
 
 [node name="ToggleChoose" type="Button" parent="."]
+visible = false
 offset_left = -54.0
 offset_top = 257.0
 offset_right = 55.0
@@ -33,6 +33,7 @@ offset_bottom = 288.0
 text = "Choose"
 
 [node name="ChooseOkay" type="Button" parent="."]
+visible = false
 offset_left = -54.0
 offset_top = 257.0
 offset_right = 55.0
@@ -59,5 +60,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="ButtonShoot" type="TextureButton" parent="."]
+offset_left = -149.0
+offset_top = 298.0
+offset_right = 115.0
+offset_bottom = 366.0
+texture_normal = ExtResource("8_0tnpc")
+
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="pressed" from="ToggleChoose" to="." method="_on_toggle_choose_pressed"]
 [connection signal="pressed" from="ChooseOkay" to="." method="_on_choose_okay_pressed"]
+[connection signal="pressed" from="ButtonShoot" to="." method="_on_button_shoot_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

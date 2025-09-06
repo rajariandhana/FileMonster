@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqp7oxm2tlpn1"]
+[gd_scene load_steps=4 format=3 uid="uid://bqp7oxm2tlpn1"]
 
+[ext_resource type="Script" uid="uid://b2wtax51uglhu" path="res://scripts/player_right.gd" id="1_2tujd"]
 [ext_resource type="Texture2D" uid="uid://v73lhx057x80" path="res://graphics/player_hand/default.png" id="1_4moqc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4moqc"]
 radius = 289.043
 
 [node name="PlayerHand" type="Area2D"]
+script = ExtResource("1_2tujd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_4moqc")
@@ -13,3 +15,7 @@ texture = ExtResource("1_4moqc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(75, 3)
 shape = SubResource("CircleShape2D_4moqc")
+
+[node name="FlashTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]

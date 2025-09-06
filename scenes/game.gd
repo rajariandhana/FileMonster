@@ -9,28 +9,17 @@ extends Node2D
 @onready var file_badge: FileBadge = $FileBadge
 @onready var enemy_hand: Node2D = $EnemyHand
 
+@onready var timer: Node = $Timer
+#@onready var status: Control = $Status
+
+@onready var button_shoot: TextureButton = $ButtonShoot
+
 var downloads_path: String = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
 
 func _ready() -> void:
 	file_badge.base_dir = downloads_path
-	toggle_choose.visible = true	
-	choose_okay.visible = false
 	randomize()
-	_pick_enemy()
-
-func _on_toggle_choose_pressed() -> void:
-	toggle_choose.visible = false
-	choose_okay.visible = true
-	player_left.toggle_activable(true)
-	player_right.toggle_choose(true)
-	
-func _on_choose_okay_pressed() -> void:
-	choose_okay.visible = false;
-	player_left.toggle_activable(false)
-	player_right.toggle_choose(false)
-	
-	var move: int = randi() % EnemyHand.Move.size()
-	enemy_hand.set_move(move)
+	reset_state()
 	
 func _list_files(path: String) -> Array:
 	var files: Array = []
@@ -55,6 +44,55 @@ func _pick_enemy() -> void:
 		file_badge.set_file("[empty Downloads]")
 		return
 
-	var idx: int = randi_range(1,3)
+	var idx: int = randi() % files.size()
 	var chosen: String = files[idx]
 	file_badge.set_file(chosen)
+
+func _on_button_shoot_pressed() -> void:
+	button_shoot.visible = false;
+	#player_left.toggle_activable(false)
+	#player_right.toggle_choose(false)
+	player_right.deactivate_choose()
+	
+	var move: int = randi_range(1,3)
+	enemy_hand.set_move(move)
+	
+	process_status()
+	timer.start(2.5)
+
+func process_status():
+	var win = check_win(player_right.get_move(), enemy_hand.get_move())
+	if win == 0:
+		#status.text = "TIE"
+		pass
+		#enemy_hand.yellow()
+		#player_right.yellow()
+	elif win == 1:
+#		damage, delete
+		#status.text = "WIN"
+		enemy_hand.red()
+	else:
+		#status.text = "LOSE"
+		player_right.red()
+	
+func check_win(player, enemy):
+	#print(str(player)+" "+str(enemy))
+	if player==enemy:
+		return 0
+	elif player==1 and enemy==3 || player==2 and enemy==1 || player==3 && enemy==2:
+		return 1
+	return -1
+
+func reset_state():
+	_pick_enemy()
+	#player_left.toggle_activable(true)
+	#player_right.toggle_choose(true)
+	button_shoot.visible = true
+	#status.text="choosing..."
+	player_right.activate_choose()
+	player_right.set_move(1)
+	enemy_hand.set_move(0)
+	timer.stop()
+
+func _on_timer_timeout() -> void:
+	reset_state()	

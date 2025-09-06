@@ -11,3 +11,7 @@ position = Vector2(28, 12)
 rotation = 0.125064
 scale = Vector2(0.849274, 0.722722)
 texture = ExtResource("2_hqcsv")
+
+[node name="FlashTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]

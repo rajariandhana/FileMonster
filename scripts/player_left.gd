@@ -6,7 +6,7 @@ var choosable: bool
 
 func _ready() -> void:
 	choosable = false
-	print("here")
+	#print("here")
 	for card in cards.get_children():
 		if card is Card:
 			card.connect("nofity_left_hand", self.select_card)
@@ -18,8 +18,8 @@ func toggle_activable(value):
 			card.set_activable(value)
 
 func select_card(selected: Card):
-	print("here")
-	print(selected)
+	#print("here")
+	#print(selected)
 	for card in cards.get_children():
 		if card is Card:
 			if card != selected:
