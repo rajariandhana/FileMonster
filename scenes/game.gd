@@ -6,12 +6,13 @@ extends Node2D
 @onready var choose_okay: Button = $ChooseOkay
 @onready var toggle_choose: Button = $ToggleChoose
 
-@onready var file_badge: Control = $FileBadge
+@onready var file_badge: FileBadge = $FileBadge
 @onready var enemy_hand: Node2D = $EnemyHand
 
 var downloads_path: String = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
 
 func _ready() -> void:
+	file_badge.base_dir = downloads_path
 	toggle_choose.visible = true	
 	choose_okay.visible = false
 	randomize()
@@ -28,8 +29,8 @@ func _on_choose_okay_pressed() -> void:
 	player_left.toggle_activable(false)
 	player_right.toggle_choose(false)
 	
-	var new_move = randi() % enemy_hand.Move.size()
-	enemy_hand.set_move(new_move)
+	var move: int = randi() % EnemyHand.Move.size()
+	enemy_hand.set_move(move)
 	
 func _list_files(path: String) -> Array:
 	var files: Array = []
@@ -54,9 +55,6 @@ func _pick_enemy() -> void:
 		file_badge.set_file("[empty Downloads]")
 		return
 
-	var idx: int = randi() % files.size()
+	var idx: int = randi_range(1,3)
 	var chosen: String = files[idx]
 	file_badge.set_file(chosen)
-
-	var move: int = randi() % EnemyHand.Move.size()
-	enemy_hand.set_move(move)

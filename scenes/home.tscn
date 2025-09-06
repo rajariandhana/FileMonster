@@ -1,3 +1,27 @@
-[gd_scene format=3 uid="uid://do2vxukw3op6w"]
+[gd_scene load_steps=2 format=3 uid="uid://do2vxukw3op6w"]
 
-[node name="home" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://sv5cwuvrrl7g" path="res://graphics/homepage/Logo.png" id="1_krot7"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1512.0
+offset_bottom = 980.0
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 252.0
+offset_top = 94.0
+offset_right = 1251.0
+offset_bottom = 539.0
+texture = ExtResource("1_krot7")
+stretch_mode = 6

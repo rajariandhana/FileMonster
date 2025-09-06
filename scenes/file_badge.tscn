@@ -13,13 +13,9 @@ script = ExtResource("1_34v83")
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -130.5
-offset_top = 4.0
-offset_right = 3.5
-offset_bottom = 138.0
+offset_right = 134.0
+offset_bottom = 134.0
+expand_mode = 1
 
 [node name="Name" type="Label" parent="."]
 layout_mode = 1
